@@ -3,27 +3,27 @@
 	<head>
 		<title>Service Worker</title>
 		<meta name="viewport" content="width=device-width"> 
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="../style.css">
 	</head>
 
 	<body>
 
 		<h2><p align="center">Service Worker Implementation</p></h2>
 
-		<img src="https://www.scienceabc.com/wp-content/uploads/2016/05/horse-running.jpg" alt="Horse"/>
-		
+		<img src="http://moggyrescue.org/wp-content/uploads/2015/12/Moggy-adoptables-cats-5.jpg" alt="Cat"/>
+
 		<script type="text/javascript">
 
 		// REGISTER SERVICE WORKER:
 
 		// Check if Service Worker is supported
 		if(navigator.serviceWorker){
-
-			// Browser supports Service Worker, hence 
-			// registering service-worker with scope
-			// of root (/) folder
-			navigator.serviceWorker.register('service-worker.js',
-				{scope: '/'}).then(function(reg){
+			
+			// Browser supports Service Worker, hence
+			// register service-worker-cat, with SPECIFIC 
+			// scope of /cat/ folder
+			navigator.serviceWorker.register('/cat/service-worker-cat.js',
+				{scope: '/cat/'}).then(function(reg){
 					console.info('[SUCCESS] service-worker-cat registered');
 			}).catch(function(err){
 					console.info('[FAILURE] service-worker-cat registration');

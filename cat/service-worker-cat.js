@@ -1,35 +1,20 @@
-// INSTALL EVENT:
-// Called only once, when browser sees this version of Service Worker
-// for the first time
+'use strict';
+
+importScripts('../serviceworker-cache-polyfill.js');
+
+// INSTALL SERVICE WORKER:
 self.addEventListener('install', function(event){
-	console.info('[SUCCESS] Service Worker Installed');
-	
-	event.waitUntil(
-
-		// Opens a new cache
-		caches.open('cache_v1').then(function(cache){
-			return cache.addAll([
-
-				// Load this array into cache
-				'/'
-				
-			]);
-		})
-	);
+	console.info('[SUCCESS] service-worker-cat installed', + event);
 });
 
-
-// ACTIVATE EVENT:
-// Activate the Service Worker
+// ACTIVATE SERVICE WORKER:
 self.addEventListener('activate', function(event){
-
-	console.info('[SUCCESS] Service Worker Activated');
-
+	console.info('[SUCCESS] service-worker-cat activated', + event);
 });
 
 self.addEventListener('fetch', function(event){
 	console.info('[FETCH] ' + event.request.url);
-	
+
 	event.respondWith(
 		// Fetch from Network:
 	    fetch(event.request).then(function(response){

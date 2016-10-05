@@ -1,0 +1,34 @@
+<html>
+	
+	<head>
+		<title>Service Worker</title>
+		<meta name="viewport" content="width=device-width"> 
+		<link rel="stylesheet" type="text/css" href="../style.css">
+	</head>
+
+	<body>
+
+		<h2><p align="center">Service Worker Implementation</p></h2>
+
+		<img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRYi40PaA9U3E9440YIH6qxatGyhk2h_H25jzZBpXRXypUlV75fYg" alt="Dog"/>
+
+		<script type="text/javascript">
+
+		// REGISTER SERVICE WORKER:
+
+		// Check if Service Worker is supported
+		if(navigator.serviceWorker){
+
+			// Browser supports Service Worker, hence
+			// register service-worker-dog, with SPECIFIC 
+			// scope of /dog/ folder
+			navigator.serviceWorker.register('/dog/service-worker-dog.js',
+				{scope: '/dog/'}).then(function(reg){
+					console.info('[SUCCESS] service-worker-dog registered');
+			}).catch(function(err){
+					console.info('[FAILURE] service-worker-dog registration');
+			});
+		}
+		</script>
+	</body>
+</html>
