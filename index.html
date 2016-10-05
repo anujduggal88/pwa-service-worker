@@ -1,0 +1,37 @@
+<html>
+	
+	<head>
+		<title>Service Worker</title>
+		<meta name="viewport" content="width=device-width"> 
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+
+	<body>
+
+		<h2><p align="center">Service Worker Implementation</p></h2>
+		
+		<script type="text/javascript">
+
+		// REGISTER SERVICE WORKER:
+		
+		// Check if Service Worker is supported 
+		if(navigator.serviceWorker){
+
+			// Browser supports Service Worker, hence Registering the
+			// Service Worker here
+			
+			// Defining the scope of project - where all the Service
+			// Worker should impact across the project
+			navigator.serviceWorker.register('/service-worker.js',
+				{scope:'/'}).then(function(reg){
+
+				// Defining scope at the root (/)
+				console.info('[SUCCESS] Service Worker Registered');
+
+			}).catch(function(err){
+				console.info('[FAILURE] Service Worker could not Register');
+			});
+		}
+		</script>
+	</body>
+</html>
