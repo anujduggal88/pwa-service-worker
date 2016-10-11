@@ -10,16 +10,16 @@ self.addEventListener('install', function(event){
 
 	event.waitUntil(
 		// Opens a new cache
-		caches.open('cache_sw_root_1').then(function(cache){
+		caches.open('cache_sw_horse').then(function(cache){
 			console.info('[SUCCESS] Loading into Cache');
 			return cache.addAll([
 
 				// Load this array into cache
 				'/',
+				"/index.html",
 				'style.css',
 				'img/AD.png',
-				'https://fonts.gstatic.com/s/roboto/v15/2UX7WLTfW3W8TclTUvlFyQ.woff',
-				new Request('https://farm6.staticflickr.com/5594/14749918329_888df4f2ef.jpg')
+				'https://www.scienceabc.com/wp-content/uploads/2016/05/horse-running.jpg'
 			]);
 		}).catch(function(){
 			console.info('[FAILURE] Loading Cache');
@@ -40,14 +40,53 @@ self.addEventListener('activate', function(event){
 // FETCH EVENT:
 // Fires up when Service Worker encounters a fetch request
 self.addEventListener('fetch', function(event){
+
 	console.info('[FETCH] ' + event.request.url);
 
-	// Fetching from Cache:
-	event.respondWith(
-	    caches.match(event.request).then(function(response){
+	// DEFINE RULES:
 
-	       //Check if you get the match in the cache - return as such, else fetch from the network
-	       return response || fetch(event.request);
-	    })
+	// RULE #1 - FETCH FROM NETWORK
+
+	// event.respondWith(
+	//
+	// 	// Fetch from Network:
+	// 	fetch(event.request).then(function(response){
+	// 		console.log('[NETWORK] Fetched from Internet');
+	// 		return response;
+	// 	}).catch(function(){
+	//
+	// 		// Log message and return custom response:
+	// 		console.log('[OFFLINE] Unable to fetch the request from Internet');
+	// 		return new Response('Unable to fetch from Internet');
+	// 	})
+	// );
+
+	// RULE #2 - FETCH FROM CACHE
+
+	// event.respondWith(
+	//
+	// 	//Fetch from Cache:
+	// 	caches.match(event.request).then(function(response){
+	// 		 console.log('[CACHE] Reading from Cache');
+	// 		 return response;
+	// 	}).catch(function(){
+	// 		 // Respond Offline:
+	// 		 console.log('[OFFLINE] Unable to fetch from cache');
+	// 		 return new Response('Unable to fetch from Cache');
+	// 	})
+	// );
+
+	// RULE #3 - FETCH FROM CACHE/INTERNET/OFFLINE
+	event.respondWith(
+
+		//Fetch from Cache/Network:
+		caches.match(event.request).then(function(response){
+			 console.log('[CACHE/NETWORK] Reading from Cache/Internet');
+			 return response || fetch(event.request);
+		}).catch(function(){
+			 // Respond Offline:
+			 console.log('[OFFLINE] Unable to fetch from cache');
+			 return new Response('Unable to fetch from Cache');
+		})
 	);
 });
