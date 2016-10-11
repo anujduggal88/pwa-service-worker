@@ -1,8 +1,8 @@
 <html>
-	
+
 	<head>
 		<title>Service Worker</title>
-		<meta name="viewport" content="width=device-width"> 
+		<meta name="viewport" content="width=device-width">
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 
@@ -11,7 +11,7 @@
 		<h2><p align="center">Service Worker Implementation</p></h2>
 
 		<img src="https://www.scienceabc.com/wp-content/uploads/2016/05/horse-running.jpg" alt="Horse"/>
-		
+
 		<script type="text/javascript">
 
 		// REGISTER SERVICE WORKER:
@@ -19,14 +19,14 @@
 		// Check if Service Worker is supported
 		if(navigator.serviceWorker){
 
-			// Browser supports Service Worker, hence 
+			// Browser supports Service Worker, hence
 			// registering service-worker with scope
 			// of root (/) folder
 			navigator.serviceWorker.register('service-worker.js',
 				{scope: '/'}).then(function(reg){
-					console.info('[SUCCESS] service-worker-cat registered');
+					console.info('[SUCCESS] service-worker registered');
 			}).catch(function(err){
-					console.info('[FAILURE] service-worker-cat registration');
+					console.info('[FAILURE] service-worker registration');
 			});
 		}
 		</script>
